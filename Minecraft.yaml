@@ -1,0 +1,127 @@
+---
+type: 1
+title: Minecraft Server
+name: minecraft-server
+description: A customizable Minecraft server container.
+logo: https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/transmission-icon.png
+image: itzg/minecraft-server:latest
+note: Configure and manage a Minecraft server with customizable settings.
+categories:
+- Games
+- Servers
+platform: linux
+restart_policy: unless-stopped
+ports:
+- 25565:25565/tcp
+network_mode: bridge
+volumes:
+- container: "/data"
+  bind: "!minecraft_data"
+- container: "/etc/localtime"
+  bind: "!localtime"
+env:
+- name: EULA
+  label: Accept EULA
+  description: You MUST set this to true to accept Minecraft's EULA.
+  default: 'false'
+  required: true
+- name: VERSION
+  label: Minecraft Version
+  description: The Minecraft server version to use (e.g., LATEST, 1.20.1).
+  default: LATEST
+- name: TYPE
+  label: Server Type
+  description: The server type (e.g., VANILLA, SPIGOT, PAPER).
+  default: VANILLA
+- name: UID
+  label: User ID
+  description: The Linux user ID to run as.
+  default: '1000'
+- name: GID
+  label: Group ID
+  description: The Linux group ID to run as.
+  default: '1000'
+- name: MEMORY
+  label: Java Heap Memory Limit
+  description: Sets initial and maximum Java heap size.
+  default: '1G'
+- name: INIT_MEMORY
+  label: Initial Heap Memory
+  description: Sets the initial Java heap size.
+  default: '1G'
+- name: MAX_MEMORY
+  label: Maximum Heap Memory
+  description: Sets the maximum Java heap size.
+  default: '1G'
+- name: TZ
+  label: Timezone
+  description: Set the container timezone (e.g., UTC, America/New_York).
+  default: UTC
+- name: ENABLE_ROLLING_LOGS
+  label: Enable Rolling Logs
+  description: Enable rolling log files to manage log size.
+  default: 'false'
+- name: ENABLE_JMX
+  label: Enable JMX
+  description: Enables remote JMX monitoring.
+  default: 'false'
+- name: JMX_HOST
+  label: JMX Host
+  description: Host IP for JMX when enabled.
+  default: ''
+- name: USE_AIKAR_FLAGS
+  label: Use Aikar Flags
+  description: Optimized JVM flags for better performance.
+  default: 'false'
+- name: LOG_TIMESTAMP
+  label: Include Log Timestamp
+  description: Include timestamps in logs.
+  default: 'false'
+- name: DIFFICULTY
+  label: Difficulty Level
+  description: Server difficulty (peaceful, easy, normal, hard).
+  default: easy
+- name: MAX_PLAYERS
+  label: Maximum Players
+  description: Max players allowed on the server.
+  default: '20'
+- name: ALLOW_NETHER
+  label: Allow Nether
+  description: Enables travel to the Nether.
+  default: 'true'
+- name: SPAWN_ANIMALS
+  label: Spawn Animals
+  description: Enable spawning of animals.
+  default: 'true'
+- name: SPAWN_MONSTERS
+  label: Spawn Monsters
+  description: Enable spawning of monsters.
+  default: 'true'
+- name: MODE
+  label: Game Mode
+  description: Server game mode (creative, survival, adventure, spectator).
+  default: survival
+- name: MOTD
+  label: Message of the Day
+  description: Custom server welcome message.
+  default: ''
+- name: ONLINE_MODE
+  label: Online Mode
+  description: Verifies players' identities with Mojang's servers.
+  default: 'true'
+- name: ENABLE_COMMAND_BLOCK
+  label: Enable Command Blocks
+  description: Allows the use of command blocks.
+  default: 'false'
+- name: GENERATE_STRUCTURES
+  label: Generate Structures
+  description: Enables generation of structures like villages.
+  default: 'true'
+- name: PVP
+  label: Player vs Player
+  description: Enables PVP mode.
+  default: 'true'
+- name: ICON
+  label: Server Icon URL
+  description: URL for server icon (will be downloaded and formatted).
+  default: ''
